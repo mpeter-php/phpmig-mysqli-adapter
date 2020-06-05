@@ -1,0 +1,23 @@
+{
+    "name": "mpeter-php/phpmig-mysqli-adapter",
+    "type": "library",
+    "keywords": ["php", "phpmig", "migration"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mario Peter",
+            "email": "mario.peter@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Phpmig\\Adapter\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">5.3",
+        "davedevelopment/phpmig": "^1.6"
+    }
+}
+
