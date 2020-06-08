@@ -1,6 +1,6 @@
 <?php
 /**
- *
+ * A Mysqli Adapter for Phpmig
  */
 
 namespace Phpmig\Adapter;
@@ -18,17 +18,17 @@ class MysqlIAdapter implements AdapterInterface
     protected $tableName;
 
     /**
-     * @var mysqli
+     * @var \mysqli
      */
     protected $connection;
 
     /**
      * Constructor
      *
-     * @param mysqli $connection
-     * @param string $tableName
+     * @param \mysqli $connection
+     * @param string  $tableName
      */
-    public function __construct(mysqli $connection, $tableName)
+    public function __construct(\mysqli $connection, $tableName)
     {
         $this->connection = $connection;
         $this->tableName = $tableName;
@@ -64,12 +64,10 @@ class MysqlIAdapter implements AdapterInterface
     public function up(Migration $migration)
     {
         $this->connection->query(
-            vsprintf(
+            sprintf(
                 "INSERT INTO `%s` SET `version` = '%s'",
-                [
-                    $this->connection->real_escape_string($this->tableName),
-                    $this->connection->real_escape_string($migration->getVersion())
-                ]
+                $this->connection->real_escape_string($this->tableName),
+                $this->connection->real_escape_string($migration->getVersion())
             )
         );
 
@@ -86,12 +84,10 @@ class MysqlIAdapter implements AdapterInterface
     public function down(Migration $migration)
     {
         $this->connection->query(
-            vsprintf(
+            sprintf(
                 "DELETE FROM `%s` WHERE `version` = '%s'",
-                [
-                    $this->connection->real_escape_string($this->tableName),
-                    $this->connection->real_escape_string($migration->getVersion())
-                ]
+                $this->connection->real_escape_string($this->tableName),
+                $this->connection->real_escape_string($migration->getVersion())
             )
         );
 
